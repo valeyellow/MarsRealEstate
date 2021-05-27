@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.marsrealestate.R
 import com.example.marsrealestate.data.MarsData
 import com.example.marsrealestate.databinding.PropertyItemBinding
 
@@ -34,7 +35,8 @@ class MarsPropertyAdapter(
                 Glide
                     .with(itemView)
                     .load(marsData.img_src)
-//                    .placeholder()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
                     .centerCrop()
                     .into(propertyIv)
             }

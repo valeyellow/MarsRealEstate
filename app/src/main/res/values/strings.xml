@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MarsRealEstate</string>
     <string name="image_view_description">Mars Property Image</string>
+    <string name="connection_error">Connection Error Image</string>
 </resources>

@@ -43,6 +43,9 @@ class PropertyListFragment : Fragment(R.layout.fragment_mars_property_list),
                 }
                 is Resource.Error -> {
                     showHideProgressBar(binding, visibility = false)
+                    binding.apply {
+                        connectionErrorIv.visibility = View.VISIBLE
+                    }
                     response.message?.let { errorMsg ->
                         Toast.makeText(requireContext(), errorMsg, Toast.LENGTH_SHORT).show()
                     }
