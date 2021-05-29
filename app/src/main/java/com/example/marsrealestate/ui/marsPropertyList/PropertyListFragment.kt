@@ -65,11 +65,7 @@ class PropertyListFragment : Fragment(R.layout.fragment_mars_property_list),
     }
 
 
-    override fun onItemClick(marsData: MarsData) {
-        Toast.makeText(
-            requireContext(),
-            "Data clicked is --> ${marsData.price}",
-            Toast.LENGTH_SHORT
-        ).show()
+    override fun onItemClick(marsDataItem: MarsData) {
+        viewModel.onItemClick(marsDataItem)
     }
 }

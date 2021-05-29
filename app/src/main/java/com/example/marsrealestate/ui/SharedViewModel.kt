@@ -49,8 +49,12 @@ class SharedViewModel : ViewModel() {
         return Resource.Error(response.message())
     }
 
-    sealed class SharedViewModelEvent {
-
+    fun onItemClick(item: MarsData) {
+        _sharedViewModelEvents.postValue(SharedViewModelEvent.NavigateToDetailFragment(item))
     }
 
+    sealed class SharedViewModelEvent {
+        data class NavigateToDetailFragment(val item: MarsData) : SharedViewModelEvent()
+
+    }
 }

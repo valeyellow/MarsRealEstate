@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.marsrealestate.databinding.ActivityMainBinding
 import com.example.marsrealestate.ui.SharedViewModel
+import com.example.marsrealestate.ui.detailFragment.DetailPropertyFragment
 import com.example.marsrealestate.ui.marsPropertyList.PropertyListFragment
 
 lateinit var viewModel: SharedViewModel
@@ -22,5 +23,23 @@ class MainActivity : AppCompatActivity() {
         val propertyListFragment = PropertyListFragment()
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, propertyListFragment, "propertyList").commit()
+
+        viewModel.sharedViewModelEvents.observe(this) { event ->
+            when (event) {
+                is SharedViewModel.SharedViewModelEvent.NavigateToDetailFragment -> {
+                    // navigate to DetailPropertyFragment
+                    val detailPropertyFragment = DetailPropertyFragment.newInstance(event.item)
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(
+                            R.id.fragment_container,
+                            detailPropertyFragment,
+                            "detailPropertyFrag"
+                        ).addToBackStack("propertyList")
+                        .commit()
+                }
+            }
+
+        }
     }
 }
