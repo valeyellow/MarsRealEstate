@@ -2,7 +2,6 @@ package com.example.marsrealestate.data
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.io.Serializable
 
 data class MarsData(
     val id: String?,
@@ -17,6 +16,9 @@ data class MarsData(
         parcel.readString()
     ) {
     }
+
+    val isRental
+        get() = type == "rent"
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)

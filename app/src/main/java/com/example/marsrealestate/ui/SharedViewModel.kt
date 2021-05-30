@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marsrealestate.api.RetrofitInstance
 import com.example.marsrealestate.data.MarsData
+import com.example.marsrealestate.utils.MarsApiFilter
 import com.example.marsrealestate.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -24,13 +25,13 @@ class SharedViewModel : ViewModel() {
     val sharedViewModelEvents = _sharedViewModelEvents.asLiveData()
 
     init {
-        getProperties()
+        getProperties(filterVal = MarsApiFilter.SHOW_ALL.filterVal)
     }
 
-    private fun getProperties() = viewModelScope.launch {
+    private fun getProperties(filterVal: String) = viewModelScope.launch {
         _properties.postValue(Resource.Loading())
         try {
-            val response = RetrofitInstance.api.getProperties()
+            val response = RetrofitInstance.api.getProperties(filterVal)
             _properties.postValue(handleGetPropertiesResponse(response))
         } catch (e: Exception) {
             when (e) {
@@ -52,6 +53,8 @@ class SharedViewModel : ViewModel() {
     fun onItemClick(item: MarsData) {
         _sharedViewModelEvents.postValue(SharedViewModelEvent.NavigateToDetailFragment(item))
     }
+
+    fun updateFilter(filter: MarsApiFilter) = getProperties(filterVal = filter.filterVal)
 
     sealed class SharedViewModelEvent {
         data class NavigateToDetailFragment(val item: MarsData) : SharedViewModelEvent()

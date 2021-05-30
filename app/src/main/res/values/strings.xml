@@ -2,4 +2,8 @@
     <string name="app_name">MarsRealEstate</string>
     <string name="image_view_description">Mars Property Image</string>
     <string name="connection_error">Connection Error Image</string>
+    <string name="show_all">Show All</string>
+    <string name="show_buy">Buy</string>
+    <string name="show_rent">Rent</string>
+    <string name="filter_results">Filter Results</string>
 </resources>
